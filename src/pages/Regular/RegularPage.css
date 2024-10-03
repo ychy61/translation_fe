@@ -13,7 +13,7 @@
   margin-bottom: 20px;
 }
 
-.input-output-box {
+.text-container {
   position: relative;
   border: 1px solid #ccc;
   border-radius: 8px;
@@ -21,24 +21,37 @@
   width: 100%;
   background-color: #f9f9f9;
   margin-bottom: 20px;
+  height: 200px; /* 고정 높이 설정 */
 }
 
-.input-textarea,
-.output-textarea {
+.input-container {
+  padding-bottom: 50px; /* 버튼 공간 확보 */
+}
+
+.text-area {
   border: none;
   resize: none;
   width: 100%;
+  height: calc(100% - 40px); /* 버튼 공간 제외한 높이 */
   outline: none;
   background-color: transparent;
 }
 
-.translate-button-container {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  margin-bottom: 20px;
+.button-container {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
 }
 
 .translate-button {
-  /* 버튼 스타일링은 여기서 제거하고 Chakra UI의 스타일을 사용합니다 */
+  background-color: #dd6b20 !important; /* Chakra UI의 orange.500 색상 */
+  color: white !important;
+}
+
+.translate-button:hover {
+  background-color: #ed8936 !important; /* Chakra UI의 orange.400 색상 */
+}
+
+.output-container .text-area {
+  height: 100%; /* 출력 컨테이너는 전체 높이 사용 */
 }

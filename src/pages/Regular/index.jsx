@@ -1,21 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import { useTranslation } from '../context/TranslationContext';
 import { Box, VStack, Textarea, IconButton } from "@chakra-ui/react";
 import { LanguageSelector } from "../../components/Layout/LanguageSelector";
 import { ArrowRight } from "lucide-react";
 import "./RegularPage.css";
 
-const RegularPage = ({ inputTextProp }) => {
+const RegularPage = () => {
+  const { inputText, setInputText } = useTranslation();
+  const [outputText, setOutputText] = useState("");
   const languages = ["제주 방언", "한글 표준어", "영어", "중국어"];
   const [sourceLanguage, setSourceLanguage] = useState(languages[1]);
   const [targetLanguage, setTargetLanguage] = useState(languages[0]);
-  const [inputText, setInputText] = useState("");
-  const [outputText, setOutputText] = useState("");
-
-  useEffect(() => {
-    if (inputTextProp) {
-      setInputText(inputTextProp);
-    }
-  }, [inputTextProp]);
 
   const handleSwapLanguages = () => {
     setSourceLanguage(targetLanguage);
@@ -23,7 +18,7 @@ const RegularPage = ({ inputTextProp }) => {
   };
 
   const handleTranslate = () => {
-    setOutputText(inputText);  // 실제 번역 로직으로 대체 가능
+    setOutputText(inputText);
   };
 
   return (
@@ -42,35 +37,33 @@ const RegularPage = ({ inputTextProp }) => {
           />
         </Box>
 
-        <Box className="input-output-box">
+        <Box className="text-container input-container">
           <Textarea
-            className="input-textarea"
+            className="text-area"
             placeholder="번역할 내용을 입력하세요"
             value={inputText}
             onChange={(e) => setInputText(e.target.value)}
             size="sm"
-            height="150px"
           />
+          <Box className="button-container">
+            <IconButton
+              className="translate-button"
+              icon={<ArrowRight />}
+              onClick={handleTranslate}
+              aria-label="Translate"
+              colorScheme="orange"
+              size="md"
+            />
+          </Box>
         </Box>
 
-        <Box className="translate-button-container">
-          <IconButton
-            icon={<ArrowRight />}
-            onClick={handleTranslate}
-            aria-label="Translate"
-            colorScheme="orange"
-            size="lg"
-          />
-        </Box>
-
-        <Box className="input-output-box">
+        <Box className="text-container output-container">
           <Textarea
-            className="output-textarea"
+            className="text-area"
             placeholder="번역 결과"
             value={outputText}
             readOnly
             size="sm"
-            height="150px"
           />
         </Box>
       </VStack>

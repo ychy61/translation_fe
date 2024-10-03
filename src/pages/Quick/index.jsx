@@ -1,4 +1,6 @@
 import React, { useCallback, useState, useEffect } from 'react';
+import { useTranslation } from '../context/TranslationContext';
+import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import './QuickPage.css';
 
@@ -63,7 +65,9 @@ const categories = [
 ];
 
 const QuickPage = ({ onSentenceSelect }) => {
-  console.log("QuickPage rendered, onSentenceSelect:", onSentenceSelect);
+  const { setInputText } = useTranslation();
+  const navigate = useNavigate();
+  //console.log("QuickPage rendered, onSentenceSelect:", onSentenceSelect);
 
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedSubcategory, setSelectedSubcategory] = useState(null);
@@ -71,9 +75,9 @@ const QuickPage = ({ onSentenceSelect }) => {
   const [selectedSentence, setSelectedSentence] = useState(null);
   const [userInput, setUserInput] = useState('');
 
-  useEffect(() => {
-    console.log("QuickPage mounted or updated, onSentenceSelect:", onSentenceSelect);
-  }, [onSentenceSelect]);
+  // useEffect(() => {
+  //   console.log("QuickPage mounted or updated, onSentenceSelect:", onSentenceSelect);
+  // }, [onSentenceSelect]);
 
   const handleCategoryClick = (category) => {
     setSelectedCategory(category === selectedCategory ? null : category);
@@ -94,13 +98,9 @@ const QuickPage = ({ onSentenceSelect }) => {
   };
 
   const handleSentenceClick = useCallback((sentence) => {
-    console.log("Sentence selected:", sentence);
-    if (typeof onSentenceSelect === 'function') {
-      onSentenceSelect(sentence);
-    } else {
-      console.error("onSentenceSelect is not a function", onSentenceSelect);
-    }
-  }, [onSentenceSelect]);
+    setInputText(sentence);
+    navigate('/regular');  // RegularPage로 이동
+  }, [setInputText, navigate]);
 
   const handleUserInput = (e) => {
     setUserInput(e.target.value);
@@ -109,11 +109,12 @@ const QuickPage = ({ onSentenceSelect }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (userInput.trim()) {
-      setSelectedSentence(userInput.trim());
-      onSentenceSelect(userInput.trim());
+      setInputText(userInput.trim());
       setUserInput('');
+      navigate('/regular');
     }
   };
+  
 
   return (
     <div className="quick-page">
@@ -157,21 +158,22 @@ const QuickPage = ({ onSentenceSelect }) => {
               </div>
             )}
 
-            {selectedSituation && (
-              <div className="recommended-sentences">
-                <h2>추천 문장:</h2>
-                {category.subcategories
-                  .find(sub => sub.name === selectedSubcategory)
-                  .situations.find(sit => sit.name === selectedSituation)
-                  .sentences.map((sentence, index) => (
-                    <button
-                      key={index}
-                      className={`sentence-button ${selectedSentence === sentence ? 'selected' : ''}`}
-                      onClick={() => handleSentenceClick(sentence)}
-                    >
-                      {sentence}
-                    </button>
-                  ))}
+{selectedSituation && (
+        <div className="recommended-sentences">
+          <h2>추천 문장:</h2>
+          {categories
+            .find(cat => cat.id === selectedCategory)
+            .subcategories.find(sub => sub.name === selectedSubcategory)
+            .situations.find(sit => sit.name === selectedSituation)
+            .sentences.map((sentence, index) => (
+              <button
+                key={index}
+                className={`sentence-button ${selectedSentence === sentence ? 'selected' : ''}`}
+                onClick={() => handleSentenceClick(sentence)}
+              >
+                {sentence}
+              </button>
+            ))}
 
                 <div className="user-input-section">              
                   <h3>또는 번역할 문장을 입력하세요</h3>
