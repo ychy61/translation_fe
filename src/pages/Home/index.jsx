@@ -15,8 +15,8 @@ import { ArrowLeftRight } from "lucide-react";
 const languages = ["제주 방언", "한글 표준어", "영어", "중국어"];
 
 export const HomePage = () => {
-  const [sourceLanguage, setSourceLanguage] = useState(languages[0]);
-  const [targetLanguage, setTargetLanguage] = useState(languages[1]);
+  const [sourceLanguage, setSourceLanguage] = useState(languages[1]);
+  const [targetLanguage, setTargetLanguage] = useState(languages[0]);
   const navigate = useNavigate();
 
   const handleSwapLanguages = () => {
@@ -77,7 +77,7 @@ export const HomePage = () => {
           borderRadius="15px"
           onClick={handleQuickTranslation}
         >
-          <Text fontSize="2xl">Quick translation</Text>
+          <Text fontSize="2xl">지금 당장 빠르게 번역해보세요 💙</Text>
         </Button>
         <Button
           colorScheme="blue"
@@ -85,7 +85,7 @@ export const HomePage = () => {
           borderRadius="15px"
           onClick={handleRegularTranslation}
         >
-          <Text fontSize="2xl">Regular translation</Text>
+          <Text fontSize="2xl">번역하수꽈? 🍊</Text>
         </Button>
       </VStack>
     </Box>

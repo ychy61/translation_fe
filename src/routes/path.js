@@ -7,4 +7,5 @@ export const RouterPath = {
       login: '/login',
       myAccount: '/myAccount',
       notFound: '*',
+      translationapp: '/translationapp',
 }

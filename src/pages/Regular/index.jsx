@@ -1,15 +1,21 @@
-import React, { useState } from "react";
-import { Box, VStack, Textarea, IconButton, HStack } from "@chakra-ui/react";
+import React, { useState, useEffect } from "react";
+import { Box, VStack, Textarea, IconButton } from "@chakra-ui/react";
 import { LanguageSelector } from "../../components/Layout/LanguageSelector";
 import { ArrowRight } from "lucide-react";
-import "./RegularPage.css";  // 새로운 CSS 파일을 가져옴
+import "./RegularPage.css";
 
-export const RegularPage = () => {
+const RegularPage = ({ inputTextProp }) => {
   const languages = ["제주 방언", "한글 표준어", "영어", "중국어"];
-  const [sourceLanguage, setSourceLanguage] = useState(languages[0]);
-  const [targetLanguage, setTargetLanguage] = useState(languages[1]);
+  const [sourceLanguage, setSourceLanguage] = useState(languages[1]);
+  const [targetLanguage, setTargetLanguage] = useState(languages[0]);
   const [inputText, setInputText] = useState("");
   const [outputText, setOutputText] = useState("");
+
+  useEffect(() => {
+    if (inputTextProp) {
+      setInputText(inputTextProp);
+    }
+  }, [inputTextProp]);
 
   const handleSwapLanguages = () => {
     setSourceLanguage(targetLanguage);
@@ -21,18 +27,21 @@ export const RegularPage = () => {
   };
 
   return (
-    <Box width="100%" maxWidth="600px" margin="auto" p={4} className="regular-page">
-      <VStack spacing={4} align="stretch">
-        {/* 언어 선택 상태바 */}
-        <LanguageSelector
-          sourceLanguage={sourceLanguage}
-          targetLanguage={targetLanguage}
-          setSourceLanguage={setSourceLanguage}
-          setTargetLanguage={setTargetLanguage}
-          handleSwapLanguages={handleSwapLanguages}
-        />
+    <Box className="regular-page">
+      <VStack spacing={4} align="stretch" width="100%">
+        <Box className="language-selector">
+          <LanguageSelector
+            sourceLanguage={sourceLanguage}
+            targetLanguage={targetLanguage}
+            setSourceLanguage={setSourceLanguage}
+            setTargetLanguage={setTargetLanguage}
+            handleSwapLanguages={handleSwapLanguages}
+            selectWidth="40%"
+            selectSize="sm"
+            containerWidth="100%"
+          />
+        </Box>
 
-        {/* 입력 영역 박스 */}
         <Box className="input-output-box">
           <Textarea
             className="input-textarea"
@@ -44,19 +53,16 @@ export const RegularPage = () => {
           />
         </Box>
 
-        {/* 입력창 하단의 번역 버튼 */}
-        <HStack justifyContent="center">
+        <Box className="translate-button-container">
           <IconButton
-            className="translate-button"
             icon={<ArrowRight />}
             onClick={handleTranslate}
             aria-label="Translate"
             colorScheme="orange"
             size="lg"
           />
-        </HStack>
+        </Box>
 
-        {/* 출력 영역 박스 */}
         <Box className="input-output-box">
           <Textarea
             className="output-textarea"

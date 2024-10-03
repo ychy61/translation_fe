@@ -7,9 +7,10 @@ import {
 import { Layout } from "../components/Layout";
 import { HomePage } from "../pages/Home";
 import { LoginPage } from "../pages/Login";
-import { QuickPage } from "../pages/Quick";
-import { RegularPage } from "../pages/Regular";
+import QuickPage from "../pages/Quick";
+import RegularPage from "../pages/Regular";
 import { RouterPath } from "./path";
+import TranslationApp from "../pages/TranslationApp";
 
 const router = createBrowserRouter([
   {
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
         path: RouterPath.notFound,
         element: <Navigate to={RouterPath.home} />,
       },
+      {
+        path: '/translation',
+        element: <TranslationApp />,
+      }
     ],
   },
   {
