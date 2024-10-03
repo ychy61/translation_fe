@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useEffect } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useTranslation } from '../context/TranslationContext';
 import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
@@ -64,7 +64,7 @@ const categories = [
   }
 ];
 
-const QuickPage = ({ onSentenceSelect }) => {
+const QuickPage = () => {
   const { setInputText } = useTranslation();
   const navigate = useNavigate();
   //console.log("QuickPage rendered, onSentenceSelect:", onSentenceSelect);
@@ -98,6 +98,7 @@ const QuickPage = ({ onSentenceSelect }) => {
   };
 
   const handleSentenceClick = useCallback((sentence) => {
+    setSelectedSentence(sentence);
     setInputText(sentence);
     navigate('/regular');  // RegularPage로 이동
   }, [setInputText, navigate]);
@@ -174,6 +175,7 @@ const QuickPage = ({ onSentenceSelect }) => {
                 {sentence}
               </button>
             ))}
+
 
                 <div className="user-input-section">              
                   <h3>또는 번역할 문장을 입력하세요</h3>

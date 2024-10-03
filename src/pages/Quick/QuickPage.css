@@ -67,12 +67,18 @@
     background-color: #fff7ed;
     color: #9a3412;
     margin-bottom: 0.5rem;
+    transition: background-color 0.3s, color 0.3s;  /* 전환 효과 추가 */
   }
   
   .sentence-button.selected {
     background-color: #f97316;
     color: white;
   }
+
+  /* 호버 효과 추가 */
+.sentence-button:hover {
+  background-color: #f97316;
+}
   
   /* 반응형 디자인을 위한 미디어 쿼리 */
   @media (max-width: 640px) {
