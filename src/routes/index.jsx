@@ -11,6 +11,7 @@ import QuickPage from "../pages/Quick";
 import RegularPage from "../pages/Regular";
 import { RouterPath } from "./path";
 import TranslationApp from "../pages/TranslationApp";
+import { BookmarkPage } from "../pages/Bookmark";
 
 const router = createBrowserRouter([
   {
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
       {
         path: RouterPath.notFound,
         element: <Navigate to={RouterPath.home} />,
+      },
+      {
+        path: RouterPath.bookmark,
+        element: <BookmarkPage />,
       },
       {
         path: '/translation',

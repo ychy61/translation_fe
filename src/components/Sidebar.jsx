@@ -21,10 +21,12 @@ const Sidebar = ({ isOpen, onClose, username = "USER1" }) => {
 
   const handleBookmark = () => {
     navigate(RouterPath.bookmark);
+    onClose();
   };
 
   const handleMyAccount = () => {
     navigate(RouterPath.myAccount);
+    onClose();
   };
 
   const handleHowtouse = () => {
