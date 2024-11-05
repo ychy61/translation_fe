@@ -1,0 +1,34 @@
+.bookmark-page {
+  padding: 2rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.bookmark-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 1rem;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease-in-out;
+}
+
+.bookmark-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+.input-text {
+  color: #666;
+}
+
+.output-text {
+  color: #000;
+}
+
+.bookmark-item .divider {
+  margin: 0.5rem 0;
+  border-color: #eee;
+}
