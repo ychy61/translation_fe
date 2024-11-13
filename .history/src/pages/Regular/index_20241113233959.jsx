@@ -37,10 +37,6 @@ const TRANSLATIONS = [
   {
     standard: "Jeju dialect is a precious and beautiful treasure",
     dialect: "제주도 사투리 촘말로 귀하고 아름다운 보물이우다"
-  },
-  {
-    standard: "여기 어떤게 맛좋아 마심?",
-    dialect: "여기서 어떤 게 맛있나요?"
   }
 ];
 
